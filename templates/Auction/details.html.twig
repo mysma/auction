@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div class="card">
+  <div class="card-header">
+    <h1>{{ auction.title }}</h1>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ auction.description }}</h5>
+    <p class="card-text">{{ auction.price }} </p>
+    <p class="card-text">Cena wywoławcza: {{ auction.startingPrice}}</p>
+      <p class="card-text">Kończy się: {{ auction.expiresAt | date("Y-m-d H:i:s")}}</p>
+    <p class="card-text">
+      {% for offer in auction.offers %}
+      Oferta: {{ offer.price }}, złożona {{ offer.createAt | date("Y-m-d H:i:s")}}</p>
+      {% endfor %}
+
+    <a href="{{ url('auction_index') }}" class="btn btn-primary pull-left">Powrót</a>
+    <a href="{{ url('auction_edit', {"id": auction.id}) }}" class="btn btn-primary pull-left">Edytuj</a>
+    {{ form_start(deleteForm, {"attr": {"class": "pull-left"}})}}
+      {{ form_widget(deleteForm.submit) }}
+      {{ form_rest(deleteForm) }}
+    {{ form_end(deleteForm) }}
+
+    {{ form_start(finishForm, {"attr": {"class": "pull-left"}})}}
+      {{ form_widget(finishForm.submit) }}
+      {{ form_rest(finishForm) }}
+    {{ form_end(finishForm) }}
+
+    {{ form_start(buyForm, {"attr": {"class": "pull-left"}})}}
+      {{ form_widget(buyForm.submit) }}
+      {{ form_rest(buyForm) }}
+    {{ form_end(buyForm) }}
+
+    <div class="clearfix"></div>
+
+    {{ form(bidForm, {"attr": {"novalidate": "novalidate"}}) }}
+  </div>
+</div>
+
+
+{% endblock %}

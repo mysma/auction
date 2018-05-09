@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div class="card">
+  <div class="card-header">
+    <h1>{{ auction.title }}</h1>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ auction.description }}</h5>
+    <p class="card-text">{{ auction.price }} </p>
+    <p class="card-text">Cena wywoławcza: {{ auction.startingPrice}}</p>
+      <p class="card-text">Zakończona {{ auction.expiresAt | date("Y-m-d H:i:s")}}</p>
+    <a href="{{ url('auction_index') }}" class="btn btn-primary pull-left">Powrót</a>
+
+
+    <div class="clearfix"></div>
+  </div>
+</div>
+
+
+{% endblock %}
